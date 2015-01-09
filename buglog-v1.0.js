@@ -432,4 +432,4 @@ var bugLog = {
 			try{ this.targetWindow.document.write(msg+bugLog.messages.separator); } catch(e){}
 		}
 	}
-};
+}; 
