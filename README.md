@@ -12,7 +12,7 @@ Depuración selectiva
 --------------------
 Permite depurar todos,sólo algunos atributos de los elementos, o no depurar determinados elementos de forma muy simple.
 
-<pre><code class="hljs">    // Depurar todos
+<pre><code class="hljs">// Depurar todos
 bugLog.mutationAttributesFilter = [];
 // Depurar sólo cellspacing y cellspadding
 bugLog.mutationAttributesFilter = ['cellspacing', 'cellspadding'];
@@ -40,74 +40,78 @@ $('#idElement').keydown(function(e){
     }
 });</code></pre>
 
-            <h4>Histórico Exportable</h4>
-            <p>Es fácilmente exportable a fichero ya que se puede guardar como una página web más o a través de la función <b>getHistory</b> que devuelve la historia en formato cadena (String). Para utilizar esta característica sólo se debe activar y llamar a la función de importación.</p>
-            <pre><code class="hljs">    // Activar el histórico
-    bugLog.enableHistory = true;
+Histórico Exportable
+--------------------
+Es fácilmente exportable a fichero ya que se puede guardar como una página web más o a través de la función <b>getHistory</b> que devuelve la historia en formato cadena (String). Para utilizar esta característica sólo se debe activar y llamar a la función de importación.
 
-    // ....
-    // ... Aciones ...
-    // ....
+<pre><code class="hljs">// Activar el histórico
+bugLog.enableHistory = true;
 
-    // Recuperar el histórico hasta el momento en un string
-    bugLog.getHistory();</code></pre><br />
+// ....
+// ... Aciones ...
+// ....
 
-            <h4>Descripciones con selectores de CSS</h4>
-            <p>Permite ver, de forma fácil, los elementos que han sido modificados a través de selectores absolutos. Luego estos selectores se puede utilizar para definir nuevas modificaciones en las hojas de estilo CSS. Por ejemplo:</p>
-            <pre><code class="hlcss">    <i>BODY > HEADER > NAV.navbar > DIV.container > DIV.navbar-header > A.navbar-brand > #logo_menu</i>.</code></pre><br />
+// Recuperar el histórico hasta el momento en un string
+bugLog.getHistory();</code></pre><br />
 
-            <h4>Control de Ajax</h4>
-            <p>Permite tener un control total sobre todas las llamadas a URL internas y externas de jQuery y Ajax. Controla los eventos de <b>beforeSend</b>, <b>success</b>, <b>complete</b> y <b>error</b>.</p>
+Descripciones con selectores de CSS
+-----------------------------------
+Permite ver, de forma fácil, los elementos que han sido modificados a través de selectores absolutos. Luego estos selectores se puede utilizar para definir nuevas modificaciones en las hojas de estilo CSS. Por ejemplo:
 
-            <h4>Control sobre el Teclado</h4>
-            <p>Se puede saber qué combinación de teclas se ha pulsado en todo momento y en qué elemento incluyendo los códigos de tecla. Con esta información luego podemos hacer filtrados como, por ejemplo, INPUTS que permitan únicamente números. Por ejemplo</p>
-            <pre><code class="hljs">    Keyboard event received into BODY > DIV.wrapper > SECTION.articles > DIV.container > ARTICLE > #inputText element. Keys Combination: "Ctrl + X". Keys Combination Code: "17 + 88".</code></pre><br />
+<pre><code class="hlcss"><i>BODY > HEADER > NAV.navbar > DIV.container > DIV.navbar-header > A.navbar-brand > #logo_menu</i>.</code></pre>
 
-            <h4>Mensajes personalizables</h4>
-            <p>Se puede definir mensajes personalizados para cada tipo de evento o mutación.</p>
-            <pre><code class="hljs">    messages:{
-        ajaxBeforeSend:'Processing request. Method: &lt;method>. Type: &lt;type>. CrossDomain: &lt;crossDomain>.  File: &lt;url>. Content Type: &lt;contentType>',
-        ajaxComplete:'The Ajax processing request FINISHED for the &lt;url> file.',
-        ajaxSuccess:'The Ajax request was completed SUCCESSFULLY for the &lt;url> file.',
-        ajaxError:'An error occurred into Ajax processing request into &lt;url> file.',
-        beforeUnloadPage:'Page request unload',
-        unloadPage:'Unloaded page',
-        errorPage:'An error occurred into file',
-        parsedPage:'Page loaded and parsed.',
-        pageChangedStatus:'Page changed status:',
-        valueChanged: 'The &lt;selector> changed the value property to &lt;value>.',
-        getsFocus: '&lt;selector> gets focus.',
-        losesFocus: '&lt;selector> loses focus.',
-        click: 'User clicks into &lt;selector>.',
-        attributeMutation: 'The &lt;attributeName> attribute has mutated from "&lt;oldValue>" to "&lt;value>" into &lt;selector> element.',
-        addedChildren: 'Added children into &lt;selector> element. Total children: &lt;totalChildren>',
-        removedChildren: 'Removed children into &lt;selector> element. Total children: &lt;totalChildren>',
-        mouseOver: 'The mouse pointer is over the &lt;selector> element.',
-        mouseOut: 'The mouse pointer leaves the &lt;selector> element.',
-        keyPress: 'Keyboard event received into &lt;selector> element. Keys Combination: "&lt;keys>". Keys Combination Code: "&lt;keysCode>".',
-        separator: '&lt;div style="border: 1px solid #333; border-width: 0px 0px 1px 0px; height:5px; width:100%;margin-bottom: 5px;">&nbsp;&lt;/div>'
-    }</code></pre><br />
+Control de Ajax
+Permite tener un control total sobre todas las llamadas a URL internas y externas de jQuery y Ajax. Controla los eventos de <b>beforeSend</b>, <b>success</b>, <b>complete</b> y <b>error</b>.
 
-            <h4>Colores personalizables</h4>
-            <p>Se pueden definir distintos colores para cads evento o mutación.</p>
-            <pre><code class="hljs">    colors: {
-        added:"#709050",                // Para elementos añadidos en el DOM
-        attributeChanged: '#ff00ff',    // Para cambios en attributos en el DOM
-        background:"#000000",           // Fondo de la ventana de BUGLOG
-        blur:"#907080",                 // Para eventos Blur
-        focus:"#9070a0",                // Para eventos Focus
-        click:"#909090",                // Para eventos Click
-        mouseOver:"#a07090",            // Para eventos Mouse Over
-        mouseOut:"#807090",             // Para eventos Mouse Out
-        keyPress:"#80a090",             // Para eventos Keypress
-        error: '#a02020',               // Para los errores detectados
-        headerForeground:"#ffffff",     // Texto de la Cabecera
-        headerBackground:"#333",        // Fondo de la Cabecera
-        normal:"#606060",               // Para cambios estándar y no registrados
-        proccessing:"#8AC007",          // Para Ajax en modo Procesando
-        readyState:"#8AC007",           // Para cambios de estado de los Ajax
-        removed: "#a01010",             // Para elementos eliminados en el DOM
-        sending:"#8AC007",              // Para Ajax en modo Enviando
-        updated:"#80a0e0",              // Para Ajax en modo Actualizando
-        valueChanged:"#FE2466"          // Para cambios en los atributos value
-    }</code></pre><br />
+Control sobre el Teclado
+Se puede saber qué combinación de teclas se ha pulsado en todo momento y en qué elemento incluyendo los códigos de tecla. Con esta información luego podemos hacer filtrados como, por ejemplo, INPUTS que permitan únicamente números. Por ejemplo
+<pre><code class="hljs">Keyboard event received into BODY > DIV.wrapper > SECTION.articles > DIV.container > ARTICLE > #inputText element. Keys Combination: "Ctrl + X". Keys Combination Code: "17 + 88".</code></pre>
+
+Mensajes personalizables
+Se puede definir mensajes personalizados para cada tipo de evento o mutación.
+<pre><code class="hljs">messages:{
+    ajaxBeforeSend:'Processing request. Method: &lt;method>. Type: &lt;type>. CrossDomain: &lt;crossDomain>.  File: &lt;url>. Content Type: &lt;contentType>',
+    ajaxComplete:'The Ajax processing request FINISHED for the &lt;url> file.',
+    ajaxSuccess:'The Ajax request was completed SUCCESSFULLY for the &lt;url> file.',
+    ajaxError:'An error occurred into Ajax processing request into &lt;url> file.',
+    beforeUnloadPage:'Page request unload',
+    unloadPage:'Unloaded page',
+    errorPage:'An error occurred into file',
+    parsedPage:'Page loaded and parsed.',
+    pageChangedStatus:'Page changed status:',
+    valueChanged: 'The &lt;selector> changed the value property to &lt;value>.',
+    getsFocus: '&lt;selector> gets focus.',
+    losesFocus: '&lt;selector> loses focus.',
+    click: 'User clicks into &lt;selector>.',
+    attributeMutation: 'The &lt;attributeName> attribute has mutated from "&lt;oldValue>" to "&lt;value>" into &lt;selector> element.',
+    addedChildren: 'Added children into &lt;selector> element. Total children: &lt;totalChildren>',
+    removedChildren: 'Removed children into &lt;selector> element. Total children: &lt;totalChildren>',
+    mouseOver: 'The mouse pointer is over the &lt;selector> element.',
+    mouseOut: 'The mouse pointer leaves the &lt;selector> element.',
+    keyPress: 'Keyboard event received into &lt;selector> element. Keys Combination: "&lt;keys>". Keys Combination Code: "&lt;keysCode>".',
+    separator: '&lt;div style="border: 1px solid #333; border-width: 0px 0px 1px 0px; height:5px; width:100%;margin-bottom: 5px;">&nbsp;&lt;/div>'
+}</code></pre>
+
+Colores personalizables
+Se pueden definir distintos colores para cads evento o mutación.
+<pre><code class="hljs">colors: {
+    added:"#709050",                // Para elementos añadidos en el DOM
+    attributeChanged: '#ff00ff',    // Para cambios en attributos en el DOM
+    background:"#000000",           // Fondo de la ventana de BUGLOG
+    blur:"#907080",                 // Para eventos Blur
+    focus:"#9070a0",                // Para eventos Focus
+    click:"#909090",                // Para eventos Click
+    mouseOver:"#a07090",            // Para eventos Mouse Over
+    mouseOut:"#807090",             // Para eventos Mouse Out
+    keyPress:"#80a090",             // Para eventos Keypress
+    error: '#a02020',               // Para los errores detectados
+    headerForeground:"#ffffff",     // Texto de la Cabecera
+    headerBackground:"#333",        // Fondo de la Cabecera
+    normal:"#606060",               // Para cambios estándar y no registrados
+    proccessing:"#8AC007",          // Para Ajax en modo Procesando
+    readyState:"#8AC007",           // Para cambios de estado de los Ajax
+    removed: "#a01010",             // Para elementos eliminados en el DOM
+    sending:"#8AC007",              // Para Ajax en modo Enviando
+    updated:"#80a0e0",              // Para Ajax en modo Actualizando
+    valueChanged:"#FE2466"          // Para cambios en los atributos value
+}</code></pre><br />
