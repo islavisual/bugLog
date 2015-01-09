@@ -3,38 +3,42 @@ bugLog 1.0
 Fácil instalación y configuración
 ---------------------------------
 Es muy fácil de instalar y configurar. Basta con incluir la librería en el HEAD de la página y una única instrucción:
-            <pre><code class="hljs">bugLog.init('default', 'console');  // Para depurar a través de consola
-    bugLog.init('all', 'window');       // Para depurar en una ventana externa</code></pre>
+<pre><code class="hljs">bugLog.init('default', 'console');  // Para depurar a través de consola
+bugLog.init('all', 'window');       // Para depurar en una ventana externa</code></pre>
 
 Para configurarlo en modo NORMAL o por defecto, como primer parámetro, establecemos el valor <b>default</b>. Para configurarlo en modo FULL o por completo, como primer parámetro, establecemos el valor <b>all</b>.
 
-            <h4>Depuración selectiva</h4>
-            <p>Permite depurar todos,sólo algunos atributos de los elementos, o no depurar determinados elementos de forma muy simple</p>
-            <pre><code class="hljs">    // Depurar todos
-    bugLog.mutationAttributesFilter = [];
-    // Depurar sólo cellspacing y cellspadding
-    bugLog.mutationAttributesFilter = ['cellspacing', 'cellspadding'];
-    // No depurar style, class, id y src... el resto si.
-    bugLog.mutationNotObserverAttributesFilter = ['style', 'class', 'id','src'];</code></pre><br />
+Depuración selectiva
+--------------------
+Permite depurar todos,sólo algunos atributos de los elementos, o no depurar determinados elementos de forma muy simple.
 
-            <h4>Funcionalidad de Deshacer y Rehacer </h4>
-            <p>Tiene provee de la lógica necesaria para gestionar de todas las modificaciones que se realizan sobre los campos de texto y desplegables, es decir, que guarda los cambios aunque se recargue la página, por lo que es muy sencillo recuperar los valores antetiores. Sólo se requiere que el elemento tenga el atributo ID definido. Los métodos a utilizar son <b>historyBack</b> para realizar la funcionalidad de UNDO y <b>historyForward</b> para realizar la funcionalidad de REDO.</p>
-            <p>Un código de ejemplo de como realizar las acciones de UNDO o REDO sería:</p>
-            <pre><code class="hljs">    // Activar la funcionalidad UNDO / REDO
-    bugLog.enableUndo = true;
+<pre><code class="hljs">    // Depurar todos
+bugLog.mutationAttributesFilter = [];
+// Depurar sólo cellspacing y cellspadding
+bugLog.mutationAttributesFilter = ['cellspacing', 'cellspadding'];
+// No depurar style, class, id y src... el resto si.
+bugLog.mutationNotObserverAttributesFilter = ['style', 'class', 'id','src'];</code></pre>
 
-    $('#idElement').keydown(function(e){
-        if ( (e.which == 121 || e.which == 89) && e.ctrlKey ) {
-            // Redo
-            bugLog.historyForward(e.target.id);
-            return false;
+Funcionalidad de Deshacer y Rehacer
+-----------------------------------
+Tiene provee de la lógica necesaria para gestionar de todas las modificaciones que se realizan sobre los campos de texto y desplegables, es decir, que guarda los cambios aunque se recargue la página, por lo que es muy sencillo recuperar los valores antetiores. Sólo se requiere que el elemento tenga el atributo ID definido. Los métodos a utilizar son <b>historyBack</b> para realizar la funcionalidad de UNDO y <b>historyForward</b> para realizar la funcionalidad de REDO.
 
-        } else if ( (e.which == 122 || e.which == 90) && e.ctrlKey ) {
-            // Undo
-            bugLog.historyBack(e.target.id);
-            return false;
-        }
-    });</code></pre><br />
+Un código de ejemplo de como realizar las acciones de UNDO o REDO sería:
+<pre><code class="hljs">// Activar la funcionalidad UNDO / REDO
+bugLog.enableUndo = true;
+
+$('#idElement').keydown(function(e){
+    if ( (e.which == 121 || e.which == 89) && e.ctrlKey ) {
+        // Redo
+        bugLog.historyForward(e.target.id);
+        return false;
+
+    } else if ( (e.which == 122 || e.which == 90) && e.ctrlKey ) {
+        // Undo
+        bugLog.historyBack(e.target.id);
+        return false;
+    }
+});</code></pre>
 
             <h4>Histórico Exportable</h4>
             <p>Es fácilmente exportable a fichero ya que se puede guardar como una página web más o a través de la función <b>getHistory</b> que devuelve la historia en formato cadena (String). Para utilizar esta característica sólo se debe activar y llamar a la función de importación.</p>
