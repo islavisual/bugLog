@@ -3,8 +3,11 @@ bugLog 1.0
 Fácil instalación y configuración
 ---------------------------------
 Es muy fácil de instalar y configurar. Basta con incluir la librería en el HEAD de la página y una única instrucción:
-<pre><code class="hljs">bugLog.init('default', 'console');  // Para depurar a través de consola
-bugLog.init('all', 'window');       // Para depurar en una ventana externa</code></pre>
+
+```javascript
+bugLog.init('default', 'console');  // Para depurar a través de consola
+bugLog.init('all', 'window');       // Para depurar en una ventana externa
+```
 
 Para configurarlo en modo NORMAL o por defecto, como primer parámetro, establecemos el valor <b>default</b>. Para configurarlo en modo FULL o por completo, como primer parámetro, establecemos el valor <b>all</b>.
 
@@ -12,19 +15,23 @@ Depuración selectiva
 --------------------
 Permite depurar todos,sólo algunos atributos de los elementos, o no depurar determinados elementos de forma muy simple.
 
-<pre><code class="hljs">// Depurar todos
+```javascript
+// Depurar todos
 bugLog.mutationAttributesFilter = [];
 // Depurar sólo cellspacing y cellspadding
 bugLog.mutationAttributesFilter = ['cellspacing', 'cellspadding'];
 // No depurar style, class, id y src... el resto si.
-bugLog.mutationNotObserverAttributesFilter = ['style', 'class', 'id','src'];</code></pre>
+bugLog.mutationNotObserverAttributesFilter = ['style', 'class', 'id','src'];
+```
 
 Funcionalidad de Deshacer y Rehacer
 -----------------------------------
 Tiene provee de la lógica necesaria para gestionar de todas las modificaciones que se realizan sobre los campos de texto y desplegables, es decir, que guarda los cambios aunque se recargue la página, por lo que es muy sencillo recuperar los valores antetiores. Sólo se requiere que el elemento tenga el atributo ID definido. Los métodos a utilizar son <b>historyBack</b> para realizar la funcionalidad de UNDO y <b>historyForward</b> para realizar la funcionalidad de REDO.
 
 Un código de ejemplo de como realizar las acciones de UNDO o REDO sería:
-<pre><code class="hljs">// Activar la funcionalidad UNDO / REDO
+
+```javascript
+// Activar la funcionalidad UNDO / REDO
 bugLog.enableUndo = true;
 
 $('#idElement').keydown(function(e){
@@ -38,13 +45,15 @@ $('#idElement').keydown(function(e){
         bugLog.historyBack(e.target.id);
         return false;
     }
-});</code></pre>
+});
+```
 
 Histórico Exportable
 --------------------
 Es fácilmente exportable a fichero ya que se puede guardar como una página web más o a través de la función <b>getHistory</b> que devuelve la historia en formato cadena (String). Para utilizar esta característica sólo se debe activar y llamar a la función de importación.
 
-<pre><code class="hljs">// Activar el histórico
+```javascript
+// Activar el histórico
 bugLog.enableHistory = true;
 
 // ....
@@ -52,13 +61,16 @@ bugLog.enableHistory = true;
 // ....
 
 // Recuperar el histórico hasta el momento en un string
-bugLog.getHistory();</code></pre>
+bugLog.getHistory();
+```
 
 Descripciones con selectores de CSS
 -----------------------------------
 Permite ver, de forma fácil, los elementos que han sido modificados a través de selectores absolutos. Luego estos selectores se puede utilizar para definir nuevas modificaciones en las hojas de estilo CSS. Por ejemplo:
 
-<pre><code class="hlcss"><i>BODY > HEADER > NAV.navbar > DIV.container > DIV.navbar-header > A.navbar-brand > #logo_menu</i>.</code></pre>
+```html
+<i>BODY > HEADER > NAV.navbar > DIV.container > DIV.navbar-header > A.navbar-brand > #logo_menu</i>
+```
 
 Control de Ajax
 ---------------
@@ -68,12 +80,16 @@ Control sobre el Teclado
 ------------------------
 Se puede saber qué combinación de teclas se ha pulsado en todo momento y en qué elemento incluyendo los códigos de tecla. Con esta información luego podemos hacer filtrados como, por ejemplo, INPUTS que permitan únicamente números. Por ejemplo:
 
-<pre><code class="hljs">Keyboard event received into BODY > DIV.wrapper > SECTION.articles > DIV.container > ARTICLE > #inputText element. Keys Combination: "Ctrl + X". Keys Combination Code: "17 + 88".</code></pre>
+```css
+Keyboard event received into BODY > DIV.wrapper > SECTION.articles > DIV.container > ARTICLE > #inputText element.
+Keys Combination: "Ctrl + X". Keys Combination Code: "17 + 88".
+```
 
 Mensajes personalizables
 ------------------------
 Se puede definir mensajes personalizados para cada tipo de evento o mutación.
-<pre><code class="hljs">messages:{
+```javascript
+messages:{
     ajaxBeforeSend:'Processing request. Method: &lt;method>. Type: &lt;type>. CrossDomain: &lt;crossDomain>.  File: &lt;url>. Content Type: &lt;contentType>',
     ajaxComplete:'The Ajax processing request FINISHED for the &lt;url> file.',
     ajaxSuccess:'The Ajax request was completed SUCCESSFULLY for the &lt;url> file.',
@@ -94,12 +110,14 @@ Se puede definir mensajes personalizados para cada tipo de evento o mutación.
     mouseOut: 'The mouse pointer leaves the &lt;selector> element.',
     keyPress: 'Keyboard event received into &lt;selector> element. Keys Combination: "&lt;keys>". Keys Combination Code: "&lt;keysCode>".',
     separator: '&lt;div style="border: 1px solid #333; border-width: 0px 0px 1px 0px; height:5px; width:100%;margin-bottom: 5px;">&nbsp;&lt;/div>'
-}</code></pre>
+}
+```
 
 Colores personalizables
 -----------------------
 Se pueden definir distintos colores para cads evento o mutación.
-<pre><code class="hljs">colors: {
+```javascript
+colors: {
     added:"#709050",                // Para elementos añadidos en el DOM
     attributeChanged: '#ff00ff',    // Para cambios en attributos en el DOM
     background:"#000000",           // Fondo de la ventana de BUGLOG
@@ -119,4 +137,5 @@ Se pueden definir distintos colores para cads evento o mutación.
     sending:"#8AC007",              // Para Ajax en modo Enviando
     updated:"#80a0e0",              // Para Ajax en modo Actualizando
     valueChanged:"#FE2466"          // Para cambios en los atributos value
-}</code></pre><br />
+}</code>
+```
