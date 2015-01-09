@@ -2,11 +2,11 @@ bugLog 1.0
 ==========
 Fácil instalación y configuración
 ---------------------------------
-            <p>Es muy fácil de instalar y configurar. Basta con incluir la librería en el HEAD de la página y una única instrucción:</p>
-            <pre><code class="hljs">    bugLog.init('default', 'console');  // Para depurar a través de consola
-    bugLog.init('all', 'window');       // Para depurar en una ventana externa</code></pre><br />
+Es muy fácil de instalar y configurar. Basta con incluir la librería en el HEAD de la página y una única instrucción:
+            <pre><code class="hljs">bugLog.init('default', 'console');  // Para depurar a través de consola
+    bugLog.init('all', 'window');       // Para depurar en una ventana externa</code></pre>
 
-            <p>Para configurarlo en modo NORMAL o por defecto, como primer parámetro, establecemos el valor <b>default</b>. Para configurarlo en modo FULL o por completo, como primer parámetro, establecemos el valor <b>all</b>. </p>
+Para configurarlo en modo NORMAL o por defecto, como primer parámetro, establecemos el valor <b>default</b>. Para configurarlo en modo FULL o por completo, como primer parámetro, establecemos el valor <b>all</b>.
 
             <h4>Depuración selectiva</h4>
             <p>Permite depurar todos,sólo algunos atributos de los elementos, o no depurar determinados elementos de forma muy simple</p>
