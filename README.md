@@ -52,7 +52,7 @@ bugLog.enableHistory = true;
 // ....
 
 // Recuperar el histórico hasta el momento en un string
-bugLog.getHistory();</code></pre><br />
+bugLog.getHistory();</code></pre>
 
 Descripciones con selectores de CSS
 -----------------------------------
@@ -61,13 +61,17 @@ Permite ver, de forma fácil, los elementos que han sido modificados a través d
 <pre><code class="hlcss"><i>BODY > HEADER > NAV.navbar > DIV.container > DIV.navbar-header > A.navbar-brand > #logo_menu</i>.</code></pre>
 
 Control de Ajax
+---------------
 Permite tener un control total sobre todas las llamadas a URL internas y externas de jQuery y Ajax. Controla los eventos de <b>beforeSend</b>, <b>success</b>, <b>complete</b> y <b>error</b>.
 
 Control sobre el Teclado
-Se puede saber qué combinación de teclas se ha pulsado en todo momento y en qué elemento incluyendo los códigos de tecla. Con esta información luego podemos hacer filtrados como, por ejemplo, INPUTS que permitan únicamente números. Por ejemplo
+------------------------
+Se puede saber qué combinación de teclas se ha pulsado en todo momento y en qué elemento incluyendo los códigos de tecla. Con esta información luego podemos hacer filtrados como, por ejemplo, INPUTS que permitan únicamente números. Por ejemplo:
+
 <pre><code class="hljs">Keyboard event received into BODY > DIV.wrapper > SECTION.articles > DIV.container > ARTICLE > #inputText element. Keys Combination: "Ctrl + X". Keys Combination Code: "17 + 88".</code></pre>
 
 Mensajes personalizables
+------------------------
 Se puede definir mensajes personalizados para cada tipo de evento o mutación.
 <pre><code class="hljs">messages:{
     ajaxBeforeSend:'Processing request. Method: &lt;method>. Type: &lt;type>. CrossDomain: &lt;crossDomain>.  File: &lt;url>. Content Type: &lt;contentType>',
@@ -93,6 +97,7 @@ Se puede definir mensajes personalizados para cada tipo de evento o mutación.
 }</code></pre>
 
 Colores personalizables
+-----------------------
 Se pueden definir distintos colores para cads evento o mutación.
 <pre><code class="hljs">colors: {
     added:"#709050",                // Para elementos añadidos en el DOM
