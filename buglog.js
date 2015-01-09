@@ -1,3 +1,7 @@
+// BugLog 1.0 (https://github.com/islavisual/bugLog). * Copyright 2014 Islavisual. 
+// Licensed under MIT (https://github.com/islavisual/bugLog/blob/master/LICENSE). 
+// Author: Pablo E. Fernández (islavisual@gmail.com)
+// Last update: 09/01/2015
 document.addEventListener("DOMContentLoaded", function(e){
     bugLog.showMessage(bugLog.messages.parsedPage, 'sending');
     $(document).ajaxSuccess(function (evt, jqxhr, settings) {
