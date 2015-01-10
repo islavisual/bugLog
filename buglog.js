@@ -192,8 +192,8 @@ var bugLog = {
         if(this.target == 'window') {
             this.targetWindow = window.open("", "bugLogWindow", "toolbar=no, scrollbars=yes, resizable=yes, top=0, left=0, width=500, height=500");
             this.targetWindow.document.body.innerHTML = "";
-            this.targetWindow.document.body.style.background = bugLog.colors.background;
-            this.targetWindow.document.write('<H2 style="background:'+bugLog.colors.headerBackground+'; color:'+bugLog.colors.headerForeground+'; padding:5px;">BugLog 1.0 - Page loaded at '+this.getTime()+"</H2>")
+            this.targetWindow.document.write('<style>body { background:'+bugLog.colors.background+'; } h2 {background:'+bugLog.colors.headerBackground+'; color:'+bugLog.colors.headerForeground+'; padding:5px;}</style>');
+            this.targetWindow.document.write('<H2>BugLog 1.0 - Page loaded at '+this.getTime()+"</H2>");
         }
 
         this.showMessage("Target: "+this.target, 'normal');
