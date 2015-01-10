@@ -333,6 +333,7 @@ var bugLow = {
                     sessionStorage.setItem('bugLowUndo', JSON.stringify(this.undo));
                     this.addHistoryForward(id, $('#'+id).val());
                     $('#'+id).val(value);
+					$('#'+id).trigger("change");
 
                     return value;
                 }
@@ -367,6 +368,7 @@ var bugLow = {
                     sessionStorage.setItem('bugLowRedo', JSON.stringify(this.redo));
                     this.addHistoryBack(id, $('#'+id).val());
                     $('#'+id).val(value);
+					$('#'+id).trigger("change");
 
                     return value;
                 }
