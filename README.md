@@ -4,6 +4,10 @@ Fácil instalación y configuración
 ---------------------------------
 Es muy fácil de instalar y configurar. Basta con incluir la librería en el HEAD de la página y una única instrucción:
 
+```html
+<script src="js/buglog/buglog-min.js"></script>
+```
+
 ```javascript
 bugLog.init('default', 'console');  // Para depurar a través de consola
 bugLog.init('all', 'window');       // Para depurar en una ventana externa
