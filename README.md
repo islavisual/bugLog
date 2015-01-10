@@ -1,18 +1,18 @@
-bugLog 1.0
+bugLow 1.0
 ==========
 Fácil instalación y configuración
 ---------------------------------
 Es muy fácil de instalar y configurar. Basta con incluir la librería en el HEAD de la página y una única instrucción:
 
 ```html
-<script src="js/buglog/buglog-min.js"></script>
+<script src="js/buglow/buglow-min.js"></script>
 ```
 
 ```javascript
 // Para depurar a través de consola
-bugLog.init('default', 'console');
+bugLow.init('default', 'console');
 // Para depurar en una ventana externa
-bugLog.init('all', 'window');
+bugLow.init('all', 'window');
 ```
 
 Para configurarlo en modo NORMAL o por defecto, como primer parámetro, establecemos el valor <b>default</b>. Para configurarlo en modo FULL o por completo, como primer parámetro, establecemos el valor <b>all</b>.
@@ -23,32 +23,32 @@ Permite depurar todos,sólo algunos atributos de los elementos, o no depurar det
 
 ```javascript
 // Depurar todos
-bugLog.mutationAttributesFilter = [];
+bugLow.mutationAttributesFilter = [];
 // Depurar sólo cellspacing y cellspadding
-bugLog.mutationAttributesFilter = ['cellspacing', 'cellspadding'];
+bugLow.mutationAttributesFilter = ['cellspacing', 'cellspadding'];
 // No depurar style, class, id y src... el resto si.
-bugLog.mutationNotObserverAttributesFilter = ['style', 'class', 'id','src'];
+bugLow.mutationNotObserverAttributesFilter = ['style', 'class', 'id','src'];
 ```
 
 Funcionalidad de Deshacer y Rehacer
 -----------------------------------
-BugLog provee de la lógica necesaria para gestionar de todas las modificaciones que se realizan sobre los campos de texto y desplegables inluso, aunque se recargue la página, por lo que es muy sencillo recuperar los valores antetiores. Sólo se requiere que el elemento tenga el atributo ID definido. Los métodos a utilizar son <b>historyBack</b> para realizar la funcionalidad de UNDO y <b>historyForward</b> para realizar la funcionalidad de REDO.
+BugLow provee de la lógica necesaria para gestionar de todas las modificaciones que se realizan sobre los campos de texto y desplegables inluso, aunque se recargue la página, por lo que es muy sencillo recuperar los valores antetiores. Sólo se requiere que el elemento tenga el atributo ID definido. Los métodos a utilizar son <b>historyBack</b> para realizar la funcionalidad de UNDO y <b>historyForward</b> para realizar la funcionalidad de REDO.
 
 Un código de ejemplo de como realizar las acciones de UNDO o REDO sería:
 
 ```javascript
 // Activar la funcionalidad UNDO / REDO
-bugLog.enableUndo = true;
+bugLow.enableUndo = true;
 
 $('#idElement').keydown(function(e){
     if ( (e.which == 121 || e.which == 89) && e.ctrlKey ) {
         // Redo
-        bugLog.historyForward(e.target.id);
+        bugLow.historyForward(e.target.id);
         return false;
 
     } else if ( (e.which == 122 || e.which == 90) && e.ctrlKey ) {
         // Undo
-        bugLog.historyBack(e.target.id);
+        bugLow.historyBack(e.target.id);
         return false;
     }
 });
@@ -60,14 +60,14 @@ Es fácilmente exportable a fichero ya que se puede guardar como una página web
 
 ```javascript
 // Activar el histórico
-bugLog.enableHistory = true;
+bugLow.enableHistory = true;
 
 // ....
 // ... Aciones ...
 // ....
 
 // Recuperar el histórico hasta el momento en un string
-bugLog.getHistory();
+bugLow.getHistory();
 ```
 
 Descripciones con selectores de CSS
@@ -126,7 +126,7 @@ Se pueden definir distintos colores para cads evento o mutación.
 colors: {
     added:"#709050",                // Para elementos añadidos en el DOM
     attributeChanged: '#ff00ff',    // Para cambios en attributos en el DOM
-    background:"#000000",           // Fondo de la ventana de BUGLOG
+    background:"#000000",           // Fondo de la ventana de BUGLOW
     blur:"#907080",                 // Para eventos Blur
     focus:"#9070a0",                // Para eventos Focus
     click:"#909090",                // Para eventos Click
