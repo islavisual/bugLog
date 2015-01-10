@@ -1,4 +1,5 @@
-// BugLog 1.0 (https://github.com/islavisual/bugLog). * Copyright 2014 Islavisual. 
+// BugLog 1.0 (https://github.com/islavisual/bugLog). 
+// Copyright 2014 Islavisual. 
 // Licensed under MIT (https://github.com/islavisual/bugLog/blob/master/LICENSE). 
 // Author: Pablo E. Fernández (islavisual@gmail.com)
 // Last update: 09/01/2015
