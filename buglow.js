@@ -1,53 +1,48 @@
-// BugLog 1.0 (https://github.com/islavisual/bugLog). 
-// Copyright 2014 Islavisual. 
-// Licensed under MIT (https://github.com/islavisual/bugLog/blob/master/LICENSE). 
-// Author: Pablo E. Fernández (islavisual@gmail.com)
-// Last update: 09/01/2015
 document.addEventListener("DOMContentLoaded", function(e){
-    bugLog.showMessage(bugLog.messages.parsedPage, 'sending');
+    bugLow.showMessage(bugLow.messages.parsedPage, 'sending');
     $(document).ajaxSuccess(function (evt, jqxhr, settings) {
-        var s = bugLog.messages.ajaxSuccess.replace('<method>', settings.async);
+        var s = bugLow.messages.ajaxSuccess.replace('<method>', settings.async);
         s     = s.replace('<type>', settings.type);
         s     = s.replace('<crossDomain>', settings.crossDomain);
         s     = s.replace('<url>', settings.url);
         s     = s.replace('<contentType>', settings.contentType);
-        bugLog.showMessage(s, 'updated');
+        bugLow.showMessage(s, 'updated');
     });
 
     $(document).ajaxError(function (evt, jqxhr, settings, err) {
-        bugLog.showMessage(bugLog.messages.ajaxError+(bugLog.target=='console'?'\n':'<br/>')+" Status Error: "+jqxhr.status+(bugLog.target=='console'?'\n':'<br/>')+"Status Text: "+jqxhr.statusText+(bugLog.target=='console'?'\n':'<br/>')+"Description: "+jqxhr.responseText, 'error');
+        bugLow.showMessage(bugLow.messages.ajaxError+(bugLow.target=='console'?'\n':'<br/>')+" Status Error: "+jqxhr.status+(bugLow.target=='console'?'\n':'<br/>')+"Status Text: "+jqxhr.statusText+(bugLow.target=='console'?'\n':'<br/>')+"Description: "+jqxhr.responseText, 'error');
     });
 
     $(document).ajaxComplete(function (evt, jqxhr, settings) {
-        var s = bugLog.messages.ajaxComplete.replace('<url>', settings.url);
-        bugLog.showMessage(s, 'readyState');
+        var s = bugLow.messages.ajaxComplete.replace('<url>', settings.url);
+        bugLow.showMessage(s, 'readyState');
     });
     $.ajaxSetup({
         beforeSend: function() {
-            var s = bugLog.messages.ajaxBeforeSend.replace('<method>', this.async);
+            var s = bugLow.messages.ajaxBeforeSend.replace('<method>', this.async);
             s     = s.replace('<type>', this.type);
             s     = s.replace('<crossDomain>', this.crossDomain);
             s     = s.replace('<url>', this.url);
             s     = s.replace('<contentType>', this.contentType);
-            bugLog.showMessage(s, 'proccessing');
+            bugLow.showMessage(s, 'proccessing');
         }
     });
 });
 document.onreadystatechange = function () {
     if (document.readyState == "interactive") {
-        bugLog.showMessage(bugLog.messages.pageChangedStatus+" "+document.readyState, 'proccessing');
+        bugLow.showMessage(bugLow.messages.pageChangedStatus+" "+document.readyState, 'proccessing');
     } else{
-        bugLog.showMessage(bugLog.messages.pageChangedStatus+" "+document.readyState, 'readyState');
+        bugLow.showMessage(bugLow.messages.pageChangedStatus+" "+document.readyState, 'readyState');
     }
 
 }
-window.addEventListener('load', function(){ bugLog.showMessage(bugLog.messages.pageChangedStatus+" finished", 'updated'); } )
+window.addEventListener('load', function(){ bugLow.showMessage(bugLow.messages.pageChangedStatus+" finished", 'updated'); } )
 window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
     console.log(errorObj)
     alert('Error: ' + errorMsg + '\n' + 'Script: ' + url + '\n' + 'Line: ' + lineNumber + '\n' + 'Column: ' + column);
     return true;
 }
-var bugLog = {
+var bugLow = {
     mode: '',
     target: '',
     targetWindow: null,
@@ -125,7 +120,7 @@ var bugLog = {
 
         this.showMessage("Mutation Observer Functionality: "+this.mutationObserver, 'normal');
 
-        var bugLogPlugin = this;
+        var blp = this;
 
         var observer = new this.mutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
@@ -142,18 +137,18 @@ var bugLog = {
                 if(typeof id == 'undefined' || id == '') id = tagName; else id = '#'+id;
                 id = parents + " > " + id;
 
-                if(mutation.type == "attributes" && bugLogPlugin.mutationNotObserverAttributesFilter.indexOf(mutation.attributeName) == -1 ){
-                    bugLog.showMessage(bugLog.messages.attributeMutation.replace('<attributeName>', mutation.attributeName).replace('<oldValue>', mutation.oldValue).replace('<value>', $(mutation.target).prop(mutation.attributeName)).replace('<selector>', id), 'attributeChanged');
+                if(mutation.type == "attributes" && blp.mutationNotObserverAttributesFilter.indexOf(mutation.attributeName) == -1 ){
+                    blp.showMessage(blp.messages.attributeMutation.replace('<attributeName>', mutation.attributeName).replace('<oldValue>', mutation.oldValue).replace('<value>', $(mutation.target).prop(mutation.attributeName)).replace('<selector>', id), 'attributeChanged');
 
                     if(typeof mutation.target.id != "undefined" && mutation.target.id != '' && mutation.target.id != null){
-                        bugLog.addHistoryBack(mutation.target.id, $(mutation.target).prop(mutation.attributeName));
+                        blp.addHistoryBack(mutation.target.id, $(mutation.target).prop(mutation.attributeName));
                     }
 
                 } else if(mutation.type == "childList"){
                     if( mutation.addedNodes != null ){
-                        bugLog.showMessage(bugLog.messages.addedChildren.replace('<totalChildren>', mutation.addedNodes.length).replace('<selector>', id), 'added');
+                        blp.showMessage(blp.messages.addedChildren.replace('<totalChildren>', mutation.addedNodes.length).replace('<selector>', id), 'added');
                     } else if( mutation.removedNodes != null ){
-                        bugLog.showMessage(bugLog.messages.removedChildren.replace('<totalChildren>', mutation.removedNodes.length).replace('<selector>', id), 'removed');
+                        blp.showMessage(blp.messages.removedChildren.replace('<totalChildren>', mutation.removedNodes.length).replace('<selector>', id), 'removed');
                     }
                 }
             });
@@ -165,15 +160,15 @@ var bugLog = {
 
         // Events control (change, focus, blur, click, ...) and call control files from Ajax and jQuery
         try{
-            bugLog.setUserEvents();
+            blp.setUserEvents();
         } catch(e){
             window.onload = function(){
-                bugLog.setUserEvents();
+                blp.setUserEvents();
             }
         }
 
-        var sessionUndo = JSON.parse(sessionStorage.getItem('bugLogUndo'));
-        if(typeof sessionUndo != 'undefined' && sessionUndo != null && sessionUndo != '') bugLog.undo = sessionUndo;
+        var sessionUndo = JSON.parse(sessionStorage.getItem('bugLowUndo'));
+        if(typeof sessionUndo != 'undefined' && sessionUndo != null && sessionUndo != '') this.undo = sessionUndo;
 
     },
     getMode: function(mode){
@@ -191,10 +186,10 @@ var bugLog = {
         } else this.target = 'console';
 
         if(this.target == 'window') {
-            this.targetWindow = window.open("", "bugLogWindow", "toolbar=no, scrollbars=yes, resizable=yes, top=0, left=0, width=500, height=500");
+            this.targetWindow = window.open("", "bugLowWindow", "toolbar=no, scrollbars=yes, resizable=yes, top=0, left=0, width=500, height=500");
             this.targetWindow.document.body.innerHTML = "";
-            this.targetWindow.document.write('<style>body { background:'+bugLog.colors.background+'; } h2 {background:'+bugLog.colors.headerBackground+'; color:'+bugLog.colors.headerForeground+'; padding:5px;}</style>');
-            this.targetWindow.document.write('<H2>BugLog 1.0 - Page loaded at '+this.getTime()+"</H2>");
+            this.targetWindow.document.write('<style>body { background:'+this.colors.background+'; } h2 {background:'+this.colors.headerBackground+'; color:'+this.colors.headerForeground+'; padding:5px;}</style>');
+            this.targetWindow.document.write('<H2>bugLow 1.0 - Page loaded at '+this.getTime()+"</H2>");
         }
 
         this.showMessage("Target: "+this.target, 'normal');
@@ -206,6 +201,7 @@ var bugLog = {
         return (d<10?"0"+d:d)+"/"+(m<10?"0"+m:m)+"/"+(y<10?"0"+y:y)+" "+(h<10?"0"+h:h)+":"+(i<10?"0"+i:i)+":"+(s<10?"0"+s:s)+"."+ms;
     },
     setUserEvents: function(){
+        var blp = this;
         $('body *').on("change click focusin focusout mouseenter mouseleave keydown", function(e){
             e.stopPropagation();
             var id       = e.target.id;
@@ -222,18 +218,18 @@ var bugLog = {
             id = parents + " > " + id;
 
             if(type == 'change'){
-                bugLog.showMessage(bugLog.messages.valueChanged.replace("<selector>", id).replace("<value>", $(e.target).val()), 'valueChanged');
+                blp.showMessage(blp.messages.valueChanged.replace("<selector>", id).replace("<value>", $(e.target).val()), 'valueChanged');
 
             } else if(type == 'focusin'){
-                bugLog.showMessage(bugLog.messages.getsFocus.replace("<selector>", id), 'focus');
+                blp.showMessage(blp.messages.getsFocus.replace("<selector>", id), 'focus');
             } else if(type == 'focusout'){
-                bugLog.showMessage(bugLog.messages.losesFocus.replace("<selector>", id), 'blur');
+                blp.showMessage(blp.messages.losesFocus.replace("<selector>", id), 'blur');
             } else if(type == 'click'){
-                bugLog.showMessage(bugLog.messages.click.replace("<selector>", id), 'click');
-            } else if(type == 'mouseenter' && this.mode == 'all'){
-                bugLog.showMessage(bugLog.messages.mouseOver.replace("<selector>", id), 'mouseOver');
-            } else if(type == 'mouseleave' && this.mode == 'all'){
-                bugLog.showMessage(bugLog.messages.mouseOut.replace("<selector>", id), 'mouseOut');
+                blp.showMessage(blp.messages.click.replace("<selector>", id), 'click');
+            } else if(type == 'mouseenter' && blp.mode == 'all'){
+                blp.showMessage(blp.messages.mouseOver.replace("<selector>", id), 'mouseOver');
+            } else if(type == 'mouseleave' && blp.mode == 'all'){
+                blp.showMessage(blp.messages.mouseOut.replace("<selector>", id), 'mouseOut');
             } else if(type == 'keydown'){
                 var charCode = (e.which) ? e.which : e.keyCode;
                 var strKey = "", strCombKey = "", codeCombKey = "";
@@ -303,39 +299,39 @@ var bugLog = {
                 else strKey += String.fromCharCode(charCode);
 
                 if(charCode > 18){
-                    bugLog.showMessage(bugLog.messages.keyPress.replace("<selector>", id).replace("<keys>", strCombKey+strKey).replace("<keysCode>", codeCombKey+charCode), 'keyPress');
+                    blp.showMessage(blp.messages.keyPress.replace("<selector>", id).replace("<keys>", strCombKey+strKey).replace("<keysCode>", codeCombKey+charCode), 'keyPress');
                     if(typeof e.target.id != "undefined" && e.target.id != '' && e.target.id != null){
-                        bugLog.addHistoryBack(e.target.id, $(e.target).val());
+                        blp.addHistoryBack(e.target.id, $(e.target).val());
                     }
                 }
             }
         });
     },
     addHistoryBack: function (id, value){
-        if(bugLog.enableUndo){
-            var path = bugLog.sha1(window.location.pathname);
+        if(this.enableUndo){
+            var path = this.sha1(window.location.pathname);
 
-            if(typeof bugLog.undo[path] == 'undefined'){ bugLog.undo[path] = {}; }
+            if(typeof this.undo[path] == 'undefined'){ this.undo[path] = {}; }
             try {
-                if(bugLog.undo[path][id][bugLog.undo[path][id].length-1] != value) bugLog.undo[path][id][bugLog.undo[path][id].length] = value;
+                if(this.undo[path][id][this.undo[path][id].length-1] != value) this.undo[path][id][this.undo[path][id].length] = value;
             } catch (e){
-                bugLog.undo[path][id] = new Array();
-                bugLog.undo[path][id][0] = value;
+                this.undo[path][id] = new Array();
+                this.undo[path][id][0] = value;
             }
-            sessionStorage.setItem('bugLogUndo', JSON.stringify(bugLog.undo));
+            sessionStorage.setItem('bugLowUndo', JSON.stringify(this.undo));
         }
     },
     historyBack: function(id){
-        if(bugLog.enableUndo){
+        if(this.enableUndo){
             try {
-                var path = bugLog.sha1(window.location.pathname);
-                var value = bugLog.undo[path][id].pop();
-                if($('#'+id).val() ==  value) var value = bugLog.undo[path][id].pop();
+                var path = this.sha1(window.location.pathname);
+                var value = this.undo[path][id].pop();
+                if($('#'+id).val() ==  value) var value = this.undo[path][id].pop();
 
                 if(typeof value !== 'undefined' && value != null && value != ""){
-                    if(bugLog.undo[path][id].length == 0) delete bugLog.undo[path][id];
-                    sessionStorage.setItem('bugLogUndo', JSON.stringify(bugLog.undo));
-                    bugLog.addHistoryForward(id, $('#'+id).val());
+                    if(this.undo[path][id].length == 0) delete this.undo[path][id];
+                    sessionStorage.setItem('bugLowUndo', JSON.stringify(this.undo));
+                    this.addHistoryForward(id, $('#'+id).val());
                     $('#'+id).val(value);
 
                     return value;
@@ -346,30 +342,30 @@ var bugLog = {
         }
     },
     addHistoryForward: function (id, value){
-        if(bugLog.enableUndo){
-            var path = bugLog.sha1(window.location.pathname);
+        if(this.enableUndo){
+            var path = this.sha1(window.location.pathname);
 
-            if(typeof bugLog.redo[path] == 'undefined'){ bugLog.redo[path] = {}; }
+            if(typeof this.redo[path] == 'undefined'){ this.redo[path] = {}; }
             try {
-                if(bugLog.redo[path][id][bugLog.redo[path][id].length-1] != value) bugLog.redo[path][id][bugLog.redo[path][id].length] = value;
+                if(this.redo[path][id][this.redo[path][id].length-1] != value) this.redo[path][id][this.redo[path][id].length] = value;
             } catch (e){
-                bugLog.redo[path][id] = new Array();
-                bugLog.redo[path][id][0] = value;
+                this.redo[path][id] = new Array();
+                this.redo[path][id][0] = value;
             }
-            sessionStorage.setItem('bugLogRedo', JSON.stringify(bugLog.redo));
+            sessionStorage.setItem('bugLowRedo', JSON.stringify(this.redo));
         }
     },
     historyForward: function(id){
-        if(bugLog.enableUndo){
+        if(this.enableUndo){
             try {
-                var path = bugLog.sha1(window.location.pathname);
-                var value = bugLog.redo[path][id].pop();
-                if($('#'+id).val() ==  value) var value = bugLog.undo[path][id].pop();
+                var path = this.sha1(window.location.pathname);
+                var value = this.redo[path][id].pop();
+                if($('#'+id).val() ==  value) var value = this.undo[path][id].pop();
 
                 if(typeof value != 'undefined' && value != null && value != ""){
-                    if(bugLog.redo[path][id].length == 0) delete bugLog.redo[path][id];
-                    sessionStorage.setItem('bugLogRedo', JSON.stringify(bugLog.redo));
-                    bugLog.addHistoryBack(id, $('#'+id).val());
+                    if(this.redo[path][id].length == 0) delete this.redo[path][id];
+                    sessionStorage.setItem('bugLowRedo', JSON.stringify(this.redo));
+                    this.addHistoryBack(id, $('#'+id).val());
                     $('#'+id).val(value);
 
                     return value;
@@ -380,8 +376,8 @@ var bugLog = {
         }
     },
     getHistory: function(){
-        var path = bugLog.sha1(window.location.pathname);
-        return bugLog.history[path];
+        var path = this.sha1(window.location.pathname);
+        return this.history[path];
     },
     sha1:function(str){
         var rotate_left=function(e,t){var n=e<<t|e>>>32-t;return n};var cvt_hex=function(e){var t="";var n;var r;for(n=7;n>=0;n--){r=e>>>n*4&15;t+=r.toString(16)}return t};var blockstart,i,j,W=new Array(80),H0=1732584193,H1=4023233417,H2=2562383102,H3=271733878,H4=3285377520,A,B,C,D,E,temp,str_len=str.length,word_array=[];for(i=0;i<str_len-3;i+=4){j=str.charCodeAt(i)<<24|str.charCodeAt(i+1)<<16|str.charCodeAt(i+2)<<8|str.charCodeAt(i+3);word_array.push(j)}switch(str_len%4){case 0:i=2147483648;break;case 1:i=str.charCodeAt(str_len-1)<<24|8388608;break;case 2:i=str.charCodeAt(str_len-2)<<24|str.charCodeAt(str_len-1)<<16|32768;break;case 3:i=str.charCodeAt(str_len-3)<<24|str.charCodeAt(str_len-2)<<16|str.charCodeAt(str_len-1)<<8|128;break}word_array.push(i);while(word_array.length%16!=14){word_array.push(0)}word_array.push(str_len>>>29);word_array.push(str_len<<3&4294967295);for(blockstart=0;blockstart<word_array.length;blockstart+=16){for(i=0;i<16;i++){W[i]=word_array[blockstart+i]}for(i=16;i<=79;i++){W[i]=rotate_left(W[i-3]^W[i-8]^W[i-14]^W[i-16],1)}A=H0;B=H1;C=H2;D=H3;E=H4;for(i=0;i<=19;i++){temp=rotate_left(A,5)+(B&C|~B&D)+E+W[i]+1518500249&4294967295;E=D;D=C;C=rotate_left(B,30);B=A;A=temp}for(i=20;i<=39;i++){temp=rotate_left(A,5)+(B^C^D)+E+W[i]+1859775393&4294967295;E=D;D=C;C=rotate_left(B,30);B=A;A=temp}for(i=40;i<=59;i++){temp=rotate_left(A,5)+(B&C|B&D|C&D)+E+W[i]+2400959708&4294967295;E=D;D=C;C=rotate_left(B,30);B=A;A=temp}for(i=60;i<=79;i++){temp=rotate_left(A,5)+(B^C^D)+E+W[i]+3395469782&4294967295;E=D;D=C;C=rotate_left(B,30);B=A;A=temp}H0=H0+A&4294967295;H1=H1+B&4294967295;H2=H2+C&4294967295;H3=H3+D&4294967295;H4=H4+E&4294967295}temp=cvt_hex(H0)+cvt_hex(H1)+cvt_hex(H2)+cvt_hex(H3)+cvt_hex(H4); return temp.toLowerCase();
@@ -398,9 +394,9 @@ var bugLog = {
                         output += message[phrase];
                         woname = true;
                     } else {
-                        output += '<b style="color:'+bugLog.colors.headerForeground+'">'+(woname==false?(isArr==true?(phrase + ' => [ '):(phrase + ' : ')):'')+'</b>';
+                        output += '<b style="color:'+this.colors.headerForeground+'">'+(woname==false?(isArr==true?(phrase + ' => [ '):(phrase + ' : ')):'')+'</b>';
                         woname = false;
-                        output += object2String(message[phrase]) + (woname==false?(isArr==true?' ] ':''):'') + (bugLog.target=='console'?'\n':'<br/>');
+                        output += object2String(message[phrase]) + (woname==false?(isArr==true?' ] ':''):'') + (this.target=='console'?'\n':'<br/>');
                     }
                 }
             }else {
@@ -408,11 +404,11 @@ var bugLog = {
                 woname = false;
             }
 
-            if(bugLog.enableHistory){
-                var path = bugLog.sha1(window.location.pathname);
-                if(typeof bugLog.history[path] == 'undefined'){ bugLog.history[path] = 'BugLog '+bugLog.version+' - Page loaded at '+bugLog.getTime()+"\n---------------------------------------------------\n"; }
+            if(this.enableHistory){
+                var path = this.sha1(window.location.pathname);
+                if(typeof this.history[path] == 'undefined'){ this.history[path] = 'bugLow '+this.version+' - Page loaded at '+this.getTime()+"\n---------------------------------------------------\n"; }
 
-                bugLog.history[path] += "[" + bugLog.getTime() + "]" + output + "\n";
+                this.history[path] += "[" + this.getTime() + "]" + output + "\n";
             }
 
             return output;
@@ -420,9 +416,9 @@ var bugLog = {
 
         var typeColor = '';
         if(typeof type == 'undefined'){
-            typeColor = bugLog.colors.normal;
+            typeColor = this.colors.normal;
         } else {
-            typeColor = bugLog.colors[type];
+            typeColor = this.colors[type];
         }
 
         if(this.target == 'console' || this.target == ''){
@@ -432,9 +428,9 @@ var bugLog = {
             else if(type == 'info') console.info(msg);
             else console.log(msg);
         } else {
-            var msg = "<span style='color:"+bugLog.colors.normal+"'>[" + this.getTime() + "]</span> ";
+            var msg = "<span style='color:"+this.colors.normal+"'>[" + this.getTime() + "]</span> ";
             msg += '<span style="color:'+typeColor+'">'+object2String(message)+'</span>';
-            try{ this.targetWindow.document.write(msg+bugLog.messages.separator); } catch(e){}
+            try{ this.targetWindow.document.write(msg+this.messages.separator); } catch(e){}
         }
     }
-}; 
+};
