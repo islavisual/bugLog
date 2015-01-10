@@ -9,8 +9,10 @@ Es muy fácil de instalar y configurar. Basta con incluir la librería en el HEA
 ```
 
 ```javascript
-bugLog.init('default', 'console');  // Para depurar a través de consola
-bugLog.init('all', 'window');       // Para depurar en una ventana externa
+// Para depurar a través de consola
+bugLog.init('default', 'console');
+// Para depurar en una ventana externa
+bugLog.init('all', 'window');
 ```
 
 Para configurarlo en modo NORMAL o por defecto, como primer parámetro, establecemos el valor <b>default</b>. Para configurarlo en modo FULL o por completo, como primer parámetro, establecemos el valor <b>all</b>.
@@ -30,7 +32,7 @@ bugLog.mutationNotObserverAttributesFilter = ['style', 'class', 'id','src'];
 
 Funcionalidad de Deshacer y Rehacer
 -----------------------------------
-Tiene provee de la lógica necesaria para gestionar de todas las modificaciones que se realizan sobre los campos de texto y desplegables, es decir, que guarda los cambios aunque se recargue la página, por lo que es muy sencillo recuperar los valores antetiores. Sólo se requiere que el elemento tenga el atributo ID definido. Los métodos a utilizar son <b>historyBack</b> para realizar la funcionalidad de UNDO y <b>historyForward</b> para realizar la funcionalidad de REDO.
+BugLog provee de la lógica necesaria para gestionar de todas las modificaciones que se realizan sobre los campos de texto y desplegables inluso, aunque se recargue la página, por lo que es muy sencillo recuperar los valores antetiores. Sólo se requiere que el elemento tenga el atributo ID definido. Los métodos a utilizar son <b>historyBack</b> para realizar la funcionalidad de UNDO y <b>historyForward</b> para realizar la funcionalidad de REDO.
 
 Un código de ejemplo de como realizar las acciones de UNDO o REDO sería:
 
@@ -54,7 +56,7 @@ $('#idElement').keydown(function(e){
 
 Histórico Exportable
 --------------------
-Es fácilmente exportable a fichero ya que se puede guardar como una página web más o a través de la función <b>getHistory</b> que devuelve la historia en formato cadena (String). Para utilizar esta característica sólo se debe activar y llamar a la función de importación.
+Es fácilmente exportable a fichero ya que se puede guardar como una página web más, desde la ventana externa o, a través de la función <b>getHistory</b> que devuelve la historia en formato cadena (String). Para utilizar esta característica sólo se debe activar y llamar a la función de importación.
 
 ```javascript
 // Activar el histórico
