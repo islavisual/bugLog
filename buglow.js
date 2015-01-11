@@ -133,9 +133,12 @@ var bugLow = {
             var a = decodeURI(blp.gp(arr[x]));
             if(a === 'null') a = decodeURI(blp.gp(ear[x]));
 
+            if(a == "null") continue;
+
             if(arr[x] == 'm' || arr[x] == 't') blp[ear[x]] = a;
-            else if(a != null && (a != "true" && a != 'false')) blp[ear[x]] = a.split(' ');
-            else if(a != null) blp[ear[x]] = a=='true'?true:false;
+            else if(a != "true" && a != 'false') blp[ear[x]] = a.split(' ');
+            else blp[ear[x]] = a=='true'?true:false;
+            console.log(arr[x], ear[x], blp[ear[x]])
         }
     },
     init: function(mode, target){
@@ -236,7 +239,6 @@ var bugLow = {
 
         this.showMessage("Mode: "+this.mode, 'normal');
         this.showMessage("Target: "+this.target, 'normal');
-        this.showMessage("Target Window: "+this.targetWindow, 'normal');
     },
     getTime: function(){
         var date = new Date();
