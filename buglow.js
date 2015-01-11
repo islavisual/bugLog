@@ -115,7 +115,31 @@ var bugLow = {
 
         return false;
     },
+    gp: function(name){
+        name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        var regexS = "[\\?&]"+name+"=([^&#]*)";
+        var regex = new RegExp( regexS );
+        var results = regex.exec( window.location.href );
+        if( results == null )
+            return null;
+        else
+            return results[1];
+    },
+    setParams: function(){
+        var blp = this;
+        var arr = ['af','eaf', 'sf', 'esf', 'ef', 'h', 'u', 'm', 't'];
+        var ear = ['attributeFilter','excludedAttributeFilter', 'selectorFilter', 'excludedSelectorFilter', 'eventFilter', 'enableHistory', 'enableUndo', 'mode', 'target'];
+        for(var x = 0; x < arr.length; x++){
+            var a = decodeURI(blp.gp(arr[x]));
+            if(a === 'null') a = decodeURI(blp.gp(ear[x]));
+
+            if(arr[x] == 'm' || arr[x] == 't') blp[ear[x]] = a;
+            else if(a != null && (a != "true" && a != 'false')) blp[ear[x]] = a.split(' ');
+            else if(a != null) blp[ear[x]] = a=='true'?true:false;
+        }
+    },
     init: function(mode, target){
+        this.setParams();
         this.getMode(mode);
         this.getTarget(target);
 
@@ -196,8 +220,6 @@ var bugLow = {
         if(typeof mode != 'undefined'){
             if(mode == 'all') this.mode = 'all'; else this.mode = 'default';
         } else this.mode = 'default';
-
-        this.showMessage("Mode: "+this.mode, 'normal');
     },
     getTarget: function(target){
         // Get type debugger
@@ -212,6 +234,7 @@ var bugLow = {
             this.targetWindow.document.write('<H2>bugLow 1.0 - Page loaded at '+this.getTime()+"</H2>");
         }
 
+        this.showMessage("Mode: "+this.mode, 'normal');
         this.showMessage("Target: "+this.target, 'normal');
         this.showMessage("Target Window: "+this.targetWindow, 'normal');
     },
@@ -223,7 +246,6 @@ var bugLow = {
     setUserEvents: function(){
         var blp = this;
         var events = blp.eventFilter.join(' ');
-        console.log(blp.eventFilter, events);
         if(blp.eventFilter.length == 0) events = 'change click focusin focusout mouseenter mouseleave keydown';
         $('body *').on(events, function(e){
             e.stopPropagation();
