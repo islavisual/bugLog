@@ -114,6 +114,29 @@ Keyboard event received into BODY > DIV.wrapper > SECTION.articles > DIV.contain
 Keys Combination: "Ctrl + X". Keys Combination Code: "17 + 88".
 ```
 
+Parámetros por URL
+------------------
+BugLow puede configurarse a través de los parámetros de la URL. A continuación se muestran el listado de parámetros configurables a través de la URL. Se pueden utilizar tanto las abreviaturas como los nombres largos.</p>
+<table>
+    <thead>
+    <tr>
+        <th>Parámetro abreviado</th>
+        <th>Equivale a</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr><td><strong>af</strong></td><td>attributeFilter</td></tr>
+    <tr><td><strong>eaf</strong></td><td>excludedAttributeFilter</td></tr>
+    <tr><td><strong>sf</strong></td><td>selectorFilter</td></tr>
+    <tr><td><strong>esf</strong></td><td>excludedSelectorFilter</td></tr>
+    <tr><td><strong>ef</strong></td><td>eventFilter</td></tr>
+    <tr><td><strong>h</strong></td><td>enableHistory</td></tr>
+    <tr><td><strong>u</strong></td><td>enableUndo</td></tr>
+    <tr><td><strong>m</strong></td><td>mode ('default' o 'all')</td></tr>
+    <tr><td><strong>t</strong></td><td>target ('console' o 'window')</td></tr>
+    </tbody>
+</table>
+
 Mensajes personalizables
 ------------------------
 Se puede definir mensajes personalizados para cada tipo de evento o mutación.
