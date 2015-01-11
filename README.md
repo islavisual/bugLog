@@ -15,8 +15,6 @@ bugLow.init('console');
 bugLow.init('window');
 ```
 
-Para configurarlo en modo NORMAL o por defecto, como primer parámetro, establecemos el valor <b>default</b>. Para configurarlo en modo FULL o por completo, como primer parámetro, establecemos el valor <b>all</b>.
-
 Depuración selectiva
 --------------------
 BugLow permite depurar selectivamente attributos, tags y eventos de manera independiente o combinada. La forma de especificar qué observar o no es a través de un array de valores que, para los ATRIBUTOS, sería:
