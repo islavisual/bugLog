@@ -1,4 +1,4 @@
-bugLow 1.0
+bugLow 1.01
 ==========
 Fácil instalación y configuración
 ---------------------------------
@@ -10,9 +10,9 @@ Es muy fácil de instalar y configurar. Basta con incluir la librería en el HEA
 
 ```javascript
 // Para depurar a través de consola
-bugLow.init('default', 'console');
+bugLow.init('console');
 // Para depurar en una ventana externa
-bugLow.init('all', 'window');
+bugLow.init('window');
 ```
 
 Para configurarlo en modo NORMAL o por defecto, como primer parámetro, establecemos el valor <b>default</b>. Para configurarlo en modo FULL o por completo, como primer parámetro, establecemos el valor <b>all</b>.
