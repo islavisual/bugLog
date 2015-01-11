@@ -19,7 +19,7 @@ Para configurarlo en modo NORMAL o por defecto, como primer parámetro, establec
 
 Depuración selectiva
 --------------------
-Permite depurar todos,sólo algunos atributos de los elementos, o no depurar determinados elementos de forma muy simple.
+BugLow permite depurar selectivamente attributos, tags y eventos de manera independiente o combinada. La forma de especificar qué observar o no es a través de un array de valores que, para los ATRIBUTOS, sería:
 
 ```javascript
 // Depurar todos
@@ -29,6 +29,29 @@ bugLow.mutationAttributesFilter = ['cellspacing', 'cellspadding'];
 // No depurar style, class, id y src... el resto si.
 bugLow.mutationNotObserverAttributesFilter = ['style', 'class', 'id','src'];
 ```
+Por defecto, <b>attributeFilter</b> esta definido a vacío y <b>excludedAttributeFilter</b> está definido a sólo el atributo <b>style</b>.
+
+Para los TAGS, al igual que los atributos, se pueden especificar uno o varios, todos o ninguno:
+
+```javascript
+// Depurar todos
+bugLow.selectorFilter = [];
+// Depurar sólo cellspacing y cellspadding
+bugLow.selectorFilter = ['INPUT', 'SELECT', 'BUTTON'];
+// No depurar style, class, id y src... el resto si.
+bugLow.excludedSelectorFilter = ['DIV', 'SPAN', 'NAV','LEGEND'];
+```
+Por defecto, Las propiedades de <b>selectorFilter</b> y <b>excludedSelectorFilter</b> están definidos a vacíos.</p>
+Para los EVENTOS, se pueden especificar uno a uno los que se desean observar:</p>
+
+```javascript
+// Depurar los ya predefinidos
+bugLow.eventsFilter = [];
+// Depurar sólo el evento change.
+bugLow.eventsFilter = ['change'];
+```
+Por defecto, si el parámetro <b>eventsFilter</b> se deja vacío se observarán los eventos de cambio de valor, click, recuperación de foco, pérdida de foco, la entrada y salida del ratón sobre un elemento y recuperación de combinaciones de teclado.
+
 
 Funcionalidad de Deshacer y Rehacer
 -----------------------------------
@@ -59,7 +82,7 @@ Histórico Exportable
 Es fácilmente exportable a fichero ya que se puede guardar como una página web más, desde la ventana externa o, a través de la función <b>getHistory</b> que devuelve la historia en formato cadena (String). Para utilizar esta característica sólo se debe activar y llamar a la función de importación.
 
 ```javascript
-// Activar el histórico
+// Activar el histórico (normalmente, establecido conjuntamente con el método init()) 
 bugLow.enableHistory = true;
 
 // ....
