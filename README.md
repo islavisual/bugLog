@@ -192,4 +192,4 @@ colors: {
 }</code>
 ```
 
-Para más información sobre diseño y desarrollo web visita <a target="_blank"  href="http://www.islavisual.com">islavisual.com</a>.
+Para más información sobre diseño y desarrollo web visita <a target="_blank"  href="http://www.islavisual.com/articulos/desarrollo_web/">islavisual.com</a>.
