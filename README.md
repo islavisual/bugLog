@@ -17,7 +17,7 @@ bugLow.init('window');
 
 Depuración selectiva
 --------------------
-BugLow permite depurar selectivamente attributos, tags y eventos de manera independiente o combinada. La forma de especificar qué observar o no es a través de un array de valores que, para los ATRIBUTOS, sería:
+BugLow permite depurar selectivamente atributos, tags y eventos de manera independiente o combinada. La forma de especificar qué observar o no es a través de un array de valores que, para los ATRIBUTOS, sería:
 
 ```javascript
 // Depurar todos
@@ -52,10 +52,9 @@ La lista de eventos permitidos son, que ya los conocéis todos, <a target="_blan
 
 Por defecto, si el parámetro <b>eventFilter</b> se deja vacío se observarán los eventos de <b>change</b>, <b>click</b>, <b>focusin</b>, <b>focusout</b>, <b>keydown</b>. En lo referente a eventos de teclado yo siempre recomiendo utilizar <b>keydown</b> porque permite controlar las teclas de Ctrl, Alt y Shift (mayúsculas).
 
-
 Funcionalidad de Deshacer y Rehacer
 -----------------------------------
-BugLow provee de la lógica necesaria para gestionar de todas las modificaciones que se realizan sobre los campos de texto y desplegables inluso, aunque se recargue la página, por lo que es muy sencillo recuperar los valores antetiores. Sólo se requiere que el elemento tenga el atributo ID definido. Los métodos a utilizar son <b>historyBack</b> para realizar la funcionalidad de UNDO y <b>historyForward</b> para realizar la funcionalidad de REDO.
+BugLow provee de la lógica necesaria para gestionar de todas las modificaciones que se realizan sobre los campos de texto y desplegables incluso, aunque se recargue la página, por lo que es muy sencillo recuperar los valores anteriores. Sólo se requiere que el elemento tenga el atributo ID definido. Los métodos a utilizar son <b>historyBack</b> para realizar la funcionalidad de UNDO y <b>historyForward</b> para realizar la funcionalidad de REDO.
 
 Un código de ejemplo de como realizar las acciones de UNDO o REDO sería:
 
