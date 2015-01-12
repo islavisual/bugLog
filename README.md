@@ -1,4 +1,4 @@
-bugLow 1.01
+bugLow 1.02
 ==========
 Fácil instalación y configuración
 ---------------------------------
