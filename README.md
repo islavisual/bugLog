@@ -191,3 +191,5 @@ colors: {
     valueChanged:"#FE2466"          // Para cambios en los atributos value
 }</code>
 ```
+
+Para más información sobre diseño y desarrollo web visita <a target="_blank"  href="http://www.islavisual.com">islavisual.com</a>.
