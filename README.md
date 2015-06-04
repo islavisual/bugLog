@@ -6,7 +6,7 @@ Es muy fácil de instalar y configurar. Basta con incluir la librería en el HEA
 
 Captura de pantalla
 -------------------
-![ScreenShot](https://github.com/islavisual/dataList/blob/master/screenshot.png)
+![ScreenShot](https://github.com/islavisual/bugLow/blob/master/screenshot.png)
 
 ```html
 <script src="js/buglow/buglow-min.js"></script>
